@@ -1,0 +1,116 @@
+Started GET "/" for 127.0.0.1 at 2025-04-26 00:36:28 +0100
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Blog'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.2ms | GC: 0.0ms)
+Completed 200 OK in 1986ms (Views: 109.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2025-04-26 00:44:28 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/posts"):
+  
+Started GET "/favicon.ico" for 127.0.0.1 at 2025-04-26 00:44:30 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Blog'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-04-25 23:50:40.974314', '2025-04-25 23:50:40.974318') RETURNING "key" /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Migrating to CreatePosts (20250425234906)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Blog'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250425234906') RETURNING "version" /*application='Blog'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Blog'*/[0m
+Migrating to CreateComments (20250425234958)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Blog'*/[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+) /*application='Blog'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_comments_on_post_id" ON "comments" ("post_id") /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250425234958') RETURNING "version" /*application='Blog'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-04-26 00:52:16 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 1448ms (Views: 8.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2025-04-26 00:52:30 +0100
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (4.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /*action='index',application='Blog',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 19.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 370.9ms | GC: 0.0ms)
+Completed 200 OK in 1814ms (Views: 374.8ms | ActiveRecord: 6.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/application-8b441ae0.css" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/turbo.min-1262d735.js" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/stimulus.min-4b1e420e.js" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/controllers/hello_controller-708796bd.js" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/controllers/index-ee64e1f1.js" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/application-bfcdf840.js" for 127.0.0.1 at 2025-04-26 00:52:32 +0100
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 127.0.0.1 at 2025-04-26 00:52:33 +0100
+Started GET "/assets/controllers/application-3affb389.js" for 127.0.0.1 at 2025-04-26 00:52:33 +0100
+Started GET "/posts/new" for 127.0.0.1 at 2025-04-26 00:52:51 +0100
+Processing by PostsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 231.3ms | GC: 0.2ms)
+  Rendered posts/new.html.erb within layouts/application (Duration: 236.3ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 239.1ms | GC: 0.2ms)
+Completed 200 OK in 1005ms (Views: 244.8ms | ActiveRecord: 0.5ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Started GET "/" for 127.0.0.1 at 2025-04-26 01:03:56 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Blog'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.6ms | GC: 0.0ms)
+Completed 200 OK in 1317ms (Views: 8.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/comments" for 127.0.0.1 at 2025-04-26 01:04:25 +0100
+Processing by CommentsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering comments/index.html.erb within layouts/application
+  [1m[36mComment Load (1.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" /*action='index',application='Blog',controller='comments'*/[0m
+  ↳ app/views/comments/index.html.erb:8
+  Rendered comments/index.html.erb within layouts/application (Duration: 20.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 63.2ms | GC: 0.0ms)
+Completed 200 OK in 873ms (Views: 70.4ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/comments/new" for 127.0.0.1 at 2025-04-26 01:04:30 +0100
+Processing by CommentsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering comments/new.html.erb within layouts/application
+  Rendered comments/_form.html.erb (Duration: 10.4ms | GC: 0.0ms)
+  Rendered comments/new.html.erb within layouts/application (Duration: 14.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.1ms | GC: 0.0ms)
+Completed 200 OK in 981ms (Views: 16.8ms | ActiveRecord: 0.9ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2025-04-26 01:04:51 +0100
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" /*action='index',application='Blog',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:8
+  Rendered posts/index.html.erb within layouts/application (Duration: 6.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | GC: 0.0ms)
+Completed 200 OK in 822ms (Views: 15.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
